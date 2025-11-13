@@ -37,7 +37,19 @@ _describe your findings_
 
 # Installation
 - _describe what API keys, user must set where (in .enve) to be able to run the project._
+
+You'll need a Census API key to run this project. 
+It should be the first row and the only content within the .env file
+Add it to a .env file in the project folder like this: 
+CENSUS_API_KEY=your_key_here
+
 - _describe what special python packages you have used_
+
+The packages you'll need are (also located in the 'requirements.txt' file: 
+- requests (to call the ACS API)
+- pandas
+- python-dotenv (to load API key from .env)
+- time
 
 
 
