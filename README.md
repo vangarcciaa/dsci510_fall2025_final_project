@@ -4,7 +4,7 @@ This project explores whether areas in Los Angeles with greater access to metro 
 
 
 # Data sources
-This project uses geographic data from LA Metro to locate the location of all metro transit stops in Los Angeles County, I will be using their shapefiles to locate transit stop locations. The variables that will be used are: STOP_NAME, STOP_LAT, AND STOP_LON. To get commute time and median household income information, I will be using two different tables from the 5-year American Community Survey API data, and match by zipcode to the location of the LA metro transit stops. 
+This project uses geographic data from LA Metro to locate the location of all metro transit stops in Los Angeles County, I will be using their shapefiles to locate transit stop locations. The variables that will be used are: STOP_NAME, STOP_LAT, AND STOP_LON. To get commute time and median household income information, I will be using two different tables from the 5-year American Community Survey API data, and match by geography to the location of the LA metro transit stops. 
 
 1. Data by Stations: All Rail Stations Combined - 07/2023. [ZIP, 7 KB]
 Description: A single shapefile that contains all stations for all lines. 
@@ -52,7 +52,7 @@ The packages you'll need are (also located in the 'requirements.txt') file:
 
 
 Instructions: 
-- The .env file contains the API Key (not comitted to Github)
+- The .env file contains the API Key (you will need to create, see instructions above)
 - 'main.py' runs the full ZIP-level retrieval and saves the CSV.
 - 'tests.py' checks if the function is running correctly
 
