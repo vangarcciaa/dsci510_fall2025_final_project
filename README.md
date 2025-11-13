@@ -30,7 +30,7 @@ Data size: 200–400 ZIP codes in LA County, very small (<1 MB)
 
 # Results 
 _describe your findings_
-In progress.
+IN-PROGRESS.
 
 
 
@@ -59,7 +59,7 @@ Instructions:
 
 # Running analysis 
 _update these instructions_
-In progress.
+IN-PROGRESS.
 
 
 ##### FOR THE PROGRESS REPORT #######
