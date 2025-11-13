@@ -42,7 +42,7 @@ Add it to a .env file in the project folder like this:
 CENSUS_API_KEY=your_key_here
 
 - _describe what special python packages you have used_
-The packages you'll need are (also located in the 'requirements.txt' file: 
+The packages you'll need are (also located in the 'requirements.txt') file: 
 - requests (to call the ACS API)
 - pandas
 - python-dotenv (to load API key from .env)
