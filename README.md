@@ -1,5 +1,5 @@
 # Does Living Near a Metro Station Reduce Commute Time?
-This project explores whether areas in Los Angeles with greater access to metro stations have a shorter average commute time, additionally, we will be analyzing median household income for homes closest to the metro stations in Los Angeles. The goal is to test the assumption that proximity to public transit rails resuces travel time for workers in Los Angeles, a historically commuter dense city, additionally we are exploring to see what household incomes are for those around metro stations. 
+This project explores whether areas in Los Angeles with greater access to metro stations have a shorter average commute time, additionally, we will be analyzing median household income for homes closest to the metro stations in Los Angeles. The goal is to test the assumption that proximity to public transit rails resuces travel time for workers in Los Angeles, a historically commuter dense city. Additionally, I plan to include median household income as a control variable in the regression model to account for socioeconomic factors that may influence commute behavior.
 
 
 
