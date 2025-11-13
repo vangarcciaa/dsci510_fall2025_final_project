@@ -46,6 +46,7 @@ The packages you'll need are (also located in the 'requirements.txt' file:
 - requests (to call the ACS API)
 - pandas
 - python-dotenv (to load API key from .env)
+- from dotenv import load_dotenv
 - time
 - os
 
