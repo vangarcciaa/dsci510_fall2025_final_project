@@ -3,3 +3,4 @@ pandas
 python-dotenv
 from dotenv import load_dotenv
 time
+geopandas
