@@ -50,12 +50,15 @@ Data size: 819.2 MB
 _describe your findings_
 
 Key Findings: 
-Income is strongly related to commute time. 
-Station count has no meaningful effect. 
-Overall Model Fit:
-- R-squared is 0.09 > the model explains about 9% of ZIP-level commute time differences, which is typical for neighborhood-level social data
-- The significant part of the model is income. 
-- Station count adds no explanatory power
+
+- Income is strongly related to commute time. 
+
+- Station count has no meaningful effect. 
+
+- Overall Model Fit:
+    - R-squared is 0.09 > the model explains about 9% of ZIP-level commute time differences, which is typical for neighborhood-level social data
+    - The significant part of the model is income. 
+    - Station count adds no explanatory power
 
 After controlling for income, the presences of Metro station does not meaningfully reduces commute times. Wealthier ZIP codes constantly show shorter commutes, suggesting that socioeconomic factors-not station-proximity- are driving the commute time differences. 
 
