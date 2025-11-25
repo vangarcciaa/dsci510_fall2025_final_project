@@ -1,0 +1,109 @@
+import os
+import requests
+import pandas as pd
+from io import BytesIO
+import geopandas as gpd
+
+# download the ZCTA-to-county crosswalk (ALL LA COUNTY ZIPS)
+url = "https://www2.census.gov/geo/docs/maps-data/data/rel/zcta_county_rel_10.txt"
+response = requests.get(url)
+
+crosswalk = pd.read_csv(BytesIO(response.content), dtype=str)
+
+# filter down to Los Angeles County (state 06, county 037)
+la_county_zips = crosswalk[
+    (crosswalk["STATE"] == "06") & (crosswalk["COUNTY"] == "037")
+]["ZCTA5"].unique()
+
+print("Number of LA County ZIPs:", len(la_county_zips))
+
+zip_full = pd.DataFrame({"zip_code": la_county_zips})
+zip_full["zip_code"] = zip_full["zip_code"].astype(str)
+
+# load metro stations shapefile 
+stations_shp = "230711_All_MetroRail_Stations.shp"
+
+stations = gpd.read_file(stations_shp)
+stations.head()
+
+# add lat/lon columns
+stations["lon"] = stations.geometry.x
+stations["lat"] = stations.geometry.y
+
+stations.head()
+
+# checking the number of rows and columns 
+stations.shape
+
+# & other information 
+stations.info()
+
+stations = gpd.read_file("230711_All_MetroRail_Stations.shp")
+
+# load ZIP shapefile
+zcta = gpd.read_file("tl_2020_us_zcta520.shp")
+
+# CRS match
+stations = stations.to_crs(zcta.crs)
+
+# Spatial join: assign ZIP to each station
+stations_with_zips = gpd.sjoin(
+    stations,
+    zcta,
+    how="left",
+    predicate="within"
+)
+
+# rename ZIP field
+stations_with_zips = stations_with_zips.rename(columns={"ZCTA5CE20": "zip_code"})
+stations_with_zips["zip_code"] = stations_with_zips["zip_code"].astype(str)
+
+# count stations per ZIP
+station_counts = (
+    stations_with_zips.groupby("zip_code")["STOP_ID"]
+    .count()
+    .reset_index(name="station_count")
+)
+
+# merge onto full ZIP list
+zip_full = zip_full.merge(station_counts, on="zip_code", how="left")
+zip_full["station_count"] = zip_full["station_count"].fillna(0)
+
+print(zip_full.head())
+
+# load ACS commute and income CSVs
+
+commute_data = pd.read_csv("data/la_county_commute_zips.csv")
+income_data = pd.read_csv("data/la_county_income_zips.csv")
+
+commute_data.head()
+
+income_data.head()
+
+commute_data["zip_code"] = commute_data["zip_code"].astype(str)
+income_data["zip_code"] = income_data["zip_code"].astype(str)
+
+# MERGE EVERYTHING INTO ONE ZIP-LEVEL DATAFRAME #
+
+final_data = (
+    zip_full
+    .merge(commute_data[["zip_code", "mean_commute_minutes"]], on="zip_code", how="left")
+    .merge(income_data[["zip_code", "median_household_income"]], on="zip_code", how="left")
+)
+
+# renaming it to "final_data" 
+final_data = final_data.rename(columns={
+    "mean_commute_minutes": "mean_commute_time",
+    "median_household_income": "median_income"
+})
+
+#save out
+
+os.makedirs("data", exist_ok=True)
+final_data.to_csv("data/final_data.csv", index=False)
+
+print("Saved ZIP-level dataset to data/final_data.csv")
+print(final_data.head())
+print(final_data.info())
+
+
