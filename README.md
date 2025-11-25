@@ -14,17 +14,37 @@ Variables: STOP_NAME, STOP_LAT, STOP_LON
 Data form: shapefiles
 Data size: 7 KB
 
-2. Mean Travel Time to Work (ACS Table B08303, by ZIP Code or County) 
-Source: https://www.census.gov/data/developers/data-sets/acs-5year.html
+2. American Community Survey, 2022 (5-Year Estimate)
+Variable: Mean Travel Time to Work (ACS Table S0801_C02_001E, by ZIP Code or County) 
+Source: https://api.census.gov/data/2022/acs/acs5/subject
 Type: API
-Field/Table: B08303_001E – Mean commute time (estimate), NAME – Geography name
+Field/Table: S0801_C02_001E – Mean commute time (estimate), NAME – Geography name
 Data size: 200–400 ZIP codes in LA County, very small (<1 MB)
 
-3. Median Household Income (ACS Table B19013, by ZIP Code or County)
+Variable: Median Household Income (ACS Table B19013, by ZIP Code or County)
 Source: https://www.census.gov/data/developers/data-sets/acs-5year.html
 Type: API
 Field/Table: B19013_001E – Median household income (estimate), NAME – Geography name
 Data size: 200–400 ZIP codes in LA County, very small (<1 MB)
+
+
+3. US Census Bureau - ZCTA-to-County Crosswalk
+Description:  United States Census Bureau map data with zip code information. 
+Source: https://www2.census.gov/geo/docs/maps-data/data/rel/zcta_county_rel_10.txt
+Type: txt file
+Variables: ZCTA5,STATE,COUNTY,GEOID,POPPT,HUPT,AREAPT,AREALANDPT,ZPOP,ZHU,ZAREA,ZAREALAND,COPOP,COHU,
+COAREA,COAREALAND,ZPOPPCT,ZHUPCT,ZAREAPCT,ZAREALANDPCT,COPOPPCT,COHUPCT,COAREAPCT,COAREALANDPC
+Data form: text file
+Data size: 6.3M 
+
+
+4. US Census Bureau TIGER/Line 2020 Shapefiles
+Description:  Census TIGER shapefile: tl_2020_us_zcta520.shp 
+Source: https://www2.census.gov/geo/tiger/TIGER2020/ZCTA520/
+Type: file-download of shapefile
+Variables: ZCTA5CE20, GEOID20, ALAND20, AWATER20, INTPTLAT20, INTPTLON20, FUNCSTAT20, MTFCC20, CLASSFP20
+Data form: shapefile
+Data size: 819.2 MB
 
 
 
