@@ -2,7 +2,6 @@
 This project explores whether areas in Los Angeles with greater access to metro stations have a shorter average commute time, additionally, we will be analyzing median household income for homes closest to the metro stations in Los Angeles. The goal is to test the assumption that proximity to public transit rails resuces travel time for workers in Los Angeles, a historically commuter dense city. Additionally, I plan to include median household income as a control variable in the regression model to account for socioeconomic factors that may influence commute behavior.
 
 
-
 # Data sources
 This project uses geographic data from LA Metro to locate the location of all metro transit stops in Los Angeles County, I will be using their shapefiles to locate transit stop locations. The variables that will be used are: STOP_NAME, STOP_LAT, AND STOP_LON. To get commute time and median household income information, I will be using two different tables from the 5-year American Community Survey API data, and match by geography to the location of the LA metro transit stops. 
 
@@ -27,7 +26,7 @@ Field/Table: B19013_001E – Median household income (estimate), NAME – Geogra
 Data size: 200–400 ZIP codes in LA County, very small (<1 MB)
 
 
-4. US Census Bureau - ZCTA-to-County Crosswalk
+3. US Census Bureau - ZCTA-to-County Crosswalk
 Description:  United States Census Bureau map data with zip code information. 
 Source: https://www2.census.gov/geo/docs/maps-data/data/rel/zcta_county_rel_10.txt
 Type: txt file
@@ -37,7 +36,7 @@ Data form: text file
 Data size: 6.3M 
 
 
-5. US Census Bureau TIGER/Line 2020 Shapefiles
+4. US Census Bureau TIGER/Line 2020 Shapefiles
 Description:  Census TIGER shapefile: tl_2020_us_zcta520.shp 
 Source: https://www2.census.gov/geo/tiger/TIGER2020/ZCTA520/
 Type: file-download of shapefile
@@ -49,7 +48,14 @@ Data size: 819.2 MB
 
 # Results 
 _describe your findings_
-IN-PROGRESS.
+Key Findings: 
+Income is strongly related to commute time. 
+Station count has no meaningful effect. 
+Overall Model Fit:
+- R-squared is 0.09 > the model explains about 9% of ZIP-level commute time differences, which is typical for neighborhood-level social data
+- The significant part of the model is income. 
+- Station count adds no explanatory power
+After controlling for income, the presences of Metro station does not meaningfully reduces commute times. Wealthier ZIP codes constantly show shorter commutes, suggesting that socioeconomic factors-not station-proximity- are driving the commute time differences. 
 
 
 
@@ -62,12 +68,19 @@ CENSUS_API_KEY=your_key_here
 
 - _describe what special python packages you have used_
 The packages you'll need are (also located in the 'requirements.txt') file: 
-- requests (to call the ACS API)
-- pandas
-- python-dotenv (to load API key from .env)
-- from dotenv import load_dotenv
-- time
-- os
+requests (to call the ACS API)
+os
+time
+numpy
+pandas
+seaborn
+requests
+geopandas
+python-dotenv
+statsmodels.api
+matplotlib.pyplot
+from io import BytesIO
+from dotenv import load_dotenv
 
 
 Instructions: 
@@ -78,7 +91,7 @@ Instructions:
 
 # Running analysis 
 _update these instructions_
-IN-PROGRESS.
+IN-PROGRESS. (NEED TO UPDATE FOR FINAL SUBMISSION).
 
 
 ##### FOR THE PROGRESS REPORT #######
