@@ -20,7 +20,6 @@ Source: https://api.census.gov/data/2022/acs/acs5/subject
 Type: API
 Field/Table: S0801_C02_001E – Mean commute time (estimate), NAME – Geography name
 Data size: 200–400 ZIP codes in LA County, very small (<1 MB)
-
 Variable: Median Household Income (ACS Table B19013, by ZIP Code or County)
 Source: https://www.census.gov/data/developers/data-sets/acs-5year.html
 Type: API
@@ -28,7 +27,7 @@ Field/Table: B19013_001E – Median household income (estimate), NAME – Geogra
 Data size: 200–400 ZIP codes in LA County, very small (<1 MB)
 
 
-3. US Census Bureau - ZCTA-to-County Crosswalk
+4. US Census Bureau - ZCTA-to-County Crosswalk
 Description:  United States Census Bureau map data with zip code information. 
 Source: https://www2.census.gov/geo/docs/maps-data/data/rel/zcta_county_rel_10.txt
 Type: txt file
@@ -38,7 +37,7 @@ Data form: text file
 Data size: 6.3M 
 
 
-4. US Census Bureau TIGER/Line 2020 Shapefiles
+5. US Census Bureau TIGER/Line 2020 Shapefiles
 Description:  Census TIGER shapefile: tl_2020_us_zcta520.shp 
 Source: https://www2.census.gov/geo/tiger/TIGER2020/ZCTA520/
 Type: file-download of shapefile
