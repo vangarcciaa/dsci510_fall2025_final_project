@@ -6,11 +6,10 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 
 
-
 # load
 final_data = pd.read_csv("data/final_data.csv")
 
-# 1) Clean up NAME cols: keep one readable name column
+# Clean up NAME cols
 if "NAME_x" in final_data.columns and "NAME_y" in final_data.columns:
     final_data = final_data.drop(columns=["NAME_x"])
     final_data = final_data.rename(columns={"NAME_y": "zcta_name"})
@@ -19,11 +18,10 @@ elif "NAME_x" in final_data.columns:
 elif "NAME_y" in final_data.columns:
     final_data = final_data.rename(columns={"NAME_y": "zcta_name"})
 
-# 2) Ensure commute column is numeric
+# Ensure commute column is numeric
 final_data["mean_commute_time"] = pd.to_numeric(final_data["mean_commute_time"], errors="coerce")
 
-# 3) Detect whether values are still scaled (raw ACS) and divide by 1000 if needed.
-#    Heuristic: if median > 100, likely scaled ints (1000 -> minutes)
+# Detect whether values are still scaled (raw ACS) and divide by 1000 if needed.
 commute_median = final_data["mean_commute_time"].median(skipna=True)
 print("median before possible scaling:", commute_median)
 
@@ -33,13 +31,13 @@ if pd.notna(commute_median) and commute_median > 100:
 else:
     print("Values look already in minutes (no division applied).")
 
-# 4) Convert income to numeric and clean impossible values
+# Convert income to numeric and clean impossible values
 final_data["median_income"] = pd.to_numeric(final_data["median_income"], errors="coerce")
 
 # replace non-positive incomes with NaN (these are likely codes/suppressions)
 final_data.loc[final_data["median_income"] <= 0, "median_income"] = pd.NA
 
-# 5) Quick sanity checks / outputs
+# Quick sanity checks / outputs
 print("\nAfter cleaning:")
 print(final_data[["zip_code", "mean_commute_time", "median_income"]].head(10))
 print("\nmean_commute_time describe:")
@@ -49,7 +47,7 @@ print(final_data["median_income"].describe())
 print("\nMissing values:")
 print(final_data[["mean_commute_time", "median_income"]].isna().sum())
 
-# 6) Save cleaned final_data back to CSV (overwrite or new file)
+# Save cleaned final_data back to CSV (overwrite or new file)
 os.makedirs("data", exist_ok=True)
 final_data.to_csv("data/final_data_cleaned.csv", index=False)
 print("\nSaved cleaned dataset to data/final_data_cleaned.csv")
