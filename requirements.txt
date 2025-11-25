@@ -1,6 +1,12 @@
-requests
-pandas
-python-dotenv
-from dotenv import load_dotenv
+os
 time
+numpy
+pandas
+seaborn
+requests
 geopandas
+python-dotenv
+statsmodels.api
+matplotlib.pyplot
+from io import BytesIO
+from dotenv import load_dotenv
