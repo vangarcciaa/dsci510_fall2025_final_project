@@ -1,81 +1,81 @@
-# Pull Median Household Income for LA Zip Codes
-
-
-import requests
-import pandas as pd
-from dotenv import load_dotenv
 import os
 import time
+import requests
+import pandas as pd
+from io import BytesIO
+from dotenv import load_dotenv
 
-# Load API key
+
+# downloading the ZCTA-to-county crosswalk CSV
+# this file maps every ZCTA to counties
+url = "https://www2.census.gov/geo/docs/maps-data/data/rel/zcta_county_rel_10.txt"
+response = requests.get(url)
+
+# load into a DataFrame
+zcta_crosswalk = pd.read_csv(BytesIO(response.content), dtype=str)
+
+# then filtering down to LA County (state=06, county=037)
+la_county_zips = zcta_crosswalk[
+    (zcta_crosswalk["STATE"] == "06") & (zcta_crosswalk["COUNTY"] == "037")
+]["ZCTA5"].unique().tolist()
+
+print(f"Total LA County ZIP codes: {len(la_county_zips)}")
+print(la_county_zips[:20])  # show first 20 ZIPs
+
+### Pull Median Household Income for LA Zip Codes ### 
+
+
+# load API key
 load_dotenv()
 API_KEY = os.getenv("CENSUS_API_KEY")
+
 
 def get_la_income_zips(la_zips):
     """
     Pull median household income (B19013_001E) for a list of LA County ZIP codes.
-    
-    Parameters:
-        la_zips (list): list of ZIP code strings
-    
-    Returns:
-        pd.DataFrame: DataFrame with columns NAME, B19013_001E, state, zip_code
+    Returns a DataFrame with columns NAME, median_household_income, zip_code
     """
     url = "https://api.census.gov/data/2022/acs/acs5"
     results = []
 
-    for z in la_zips:
+    for z in la_zips:  # <-- use the argument
         params = {
             "get": "NAME,B19013_001E",
             "for": f"zip code tabulation area:{z}",
             "key": API_KEY
         }
-        
-        response = requests.get(url, params=params)
-        
-        if response.status_code == 200:
+
+        r = requests.get(url, params=params)
+        if r.status_code == 200:
             try:
-                data = response.json()
-                row = data[1]
-                # pad missing columns if needed
-                while len(row) < 4:
-                    row.append(None)
-                results.append(row)
+                data = r.json()
+                if len(data) > 1:
+                    name = data[1][0]
+                    income = data[1][1]
+                    results.append([name, income, z])
+                else:
+                    results.append([f"ZCTA5 {z}", None, z])
             except Exception as e:
                 print(f"JSON decode error for ZIP {z}: {e}")
-                results.append([f"ZCTA5 {z}", None, None, z])
+                results.append([f"ZCTA5 {z}", None, z])
         else:
-            print(f"Error for ZIP {z}: {response.status_code}")
-            results.append([f"ZCTA5 {z}", None, None, z])
+            print(f"Error for ZIP {z}: {r.status_code}")
+            results.append([f"ZCTA5 {z}", None, z])
         
-        time.sleep(0.2)  # avoids API rate limits
-    
-    df = pd.DataFrame(results, columns=["NAME", "B19013_001E", "state", "zip_code"])
+        time.sleep(0.2)
+
+    df = pd.DataFrame(results, columns=["NAME", "median_household_income", "zip_code"])
+    df["median_household_income"] = pd.to_numeric(df["median_household_income"], errors="coerce")
     return df
 
-# Run the function and inspect results 
+df_income = get_la_income_zips(la_county_zips)
+print(df_income.describe())
+df_income.head()
+df_income.info()
 
-la_zips = [
-    "90001","90002","90003","90004","90005","90006","90007","90008","90010",
-    "90011","90012","90013","90014","90015","90016","90017","90018","90019",
-    "90020","90021","90022","90023","90024","90025","90026","90027","90028",
-    "90029","90031","90032","90033","90034","90035","90036","90037","90038",
-    "90039","90040","90041","90042","90043","90044","90045","90046","90047",
-    "90048","90049","90056","90057","90058","90059","90061","90062","90063",
-    "90064","90065","90066","90067","90068","90069","90071","90077","90089"
-]
-
-
-df_income = get_la_income_zips(la_zips)
-
-# Show a few rows
-display(df_income.head())
-
-print("ZIPs with income data:", df_income["B19013_001E"].notna().sum())
-
-
-# Save to CSV
-
+# save to CSV
 os.makedirs("data", exist_ok=True)
 df_income.to_csv("data/la_county_income_zips.csv", index=False)
 print("Saved ZIP-level income data to data/la_county_income_zips.csv")
+
+
