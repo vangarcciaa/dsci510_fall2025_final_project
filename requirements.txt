@@ -1,12 +1,13 @@
 os
 time
-numpy
-pandas
-seaborn
+numpy as np
+pandas as pd
+seaborn as sns
 requests
 geopandas
+geopandas as gpd
 python-dotenv
-statsmodels.api
-matplotlib.pyplot
+statsmodels.api as sm
+matplotlib.pyplot as plt
 from io import BytesIO
 from dotenv import load_dotenv
