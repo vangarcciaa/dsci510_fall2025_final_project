@@ -80,7 +80,7 @@ The packages you'll need are located in the 'requirements.txt' file:
 Instructions: 
 - Install all required packages: pip install -r requirements.txt
 - The .env file contains the API Key. You must create a ".env" file ad the file should contain: CENSUS_API_KEY=your_key_here (template is provided: .env.example) 
-- 'main.py': project is flly autotmated via this file.
+- 'main.py': project is fully autotmated via this file.
 - 'tests.py' checks if the function is running correctly
 
 
