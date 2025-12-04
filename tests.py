@@ -42,7 +42,7 @@ def test_metro_shapefile():
 
 
 if __name__ == "__main__":
-    print("\n=== Running Basic Project Tests ===\n")
+    print("\n=== Tests ===\n")
     test_zip_loader()
     test_income_loader()
     test_metro_shapefile()
