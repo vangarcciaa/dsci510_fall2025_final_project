@@ -2,6 +2,8 @@ import geopandas as gpd
 import pandas as pd
 from pathlib import Path
 
+# import file paths from config.py 
+from config import METRO_STATIONS_SHP
 
 def load_metro_stations(shp_path: str) -> gpd.GeoDataFrame:
     """
