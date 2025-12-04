@@ -50,7 +50,6 @@ Data size: 819.2 MB
 
 
 # Results 
-_describe your findings_
 
 Key Findings: 
 
@@ -75,7 +74,7 @@ Add it to a .env file in the project folder like this:
 CENSUS_API_KEY=your_key_here
 
 - _describe what special python packages you have used_
-The packages you'll need are (also located in the 'requirements.txt') file: pip install -r requirements.txt
+The packages you'll need are located in the 'requirements.txt' file: pip install -r requirements.txt
 
 LIST: 
 requests (to call the ACS API)
@@ -94,13 +93,13 @@ from dotenv import load_dotenv
 
 
 Instructions: 
+- Install all required packages: pip install -r requirements.txt
 - The .env file contains the API Key. You must create a ".env" file ad the file should contain: CENSUS_API_KEY=your_key_here (template is provided: .env.example) 
-- 'main.py' 
+- 'main.py': project is flly autotmated via this file.
 - 'tests.py' checks if the function is running correctly
 
 
 # Running analysis 
-_update these instructions_
 The analysis consists of:
 
 1. Data Construction Pipeline
@@ -132,10 +131,27 @@ The merged dataset is then used for modeling.
    
 
 
-##### FOR THE PROGRESS REPORT #######
-From `src/` directory run:
+##### REPOSITORY STRUCTURE #######
+dsci510_fall2025_final_project/
+│
+├── src/
+│   ├── commute_times.py
+│   ├── median_hhincome.py
+│   ├── metro_station.py
+│   ├── final_data_prep.py
+│   └── final_analysis.py
+│
+├── main.py
+├── tests.py
+├── config.py
+├── results.ipynb
+├── requirements.txt
+├── README.md
+├── docs/
+│   ├── Vanessa_Garcia_progress_report.pdf
+│   └── Vanessa_Garcia_presentation.pdf
+│
+├── .gitignore
+└── .env.example
 
-`python main.py `
 
-The ZIP-level commute data will appear in `data/` folder as 'la_county_commute_zips.csv'.
-Results of the analysis will be save in the 'results/' folder.
