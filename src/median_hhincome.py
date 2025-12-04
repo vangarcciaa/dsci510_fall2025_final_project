@@ -22,7 +22,7 @@ def get_la_county_zips():
     Download ZCTA-to-county crosswalk and return a list of LA County ZIP codes.
     """
     response = requests.get(ZCTA_CROSSWALK_URL)
-    zcta_crosswalk = pd.read_csv(BytesIO(response.content), dtype=str)
+    zcta_crosswalk = pd.read_csv(BytesIO(response.content), dtype=str, sep=",")
 
     la_zips = (
         zcta_crosswalk[
