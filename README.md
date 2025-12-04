@@ -118,25 +118,22 @@ The merged dataset is then used for modeling.
 
 ##### REPOSITORY STRUCTURE #######
 dsci510_fall2025_final_project/
-│
-├── src/
-│   ├── commute_times.py
-│   ├── median_hhincome.py
-│   ├── metro_station.py
-│   ├── final_data_prep.py
-│   └── final_analysis.py
-│
-├── main.py
-├── tests.py
-├── config.py
-├── results.ipynb
-├── requirements.txt
-├── README.md
-├── docs/
-│   ├── Vanessa_Garcia_progress_report.pdf
-│   └── Vanessa_Garcia_presentation.pdf
-│
-├── .gitignore
-└── .env.example
+- src/
+    - commute_times.py
+    - median_hhincome.py
+    - metro_station.py
+    - final_data_prep.py
+    - final_analysis.py
+- main.py
+- tests.py
+- config.py
+- results.ipynb
+- requirements.txt
+- README.md
+- docs/
+    - Vanessa_Garcia_progress_report.pdf
+    - Vanessa_Garcia_presentation.pdf
+- .gitignore
+- .env.example
 
 
