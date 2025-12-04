@@ -1,6 +1,9 @@
 # Does Living Near a Metro Station Reduce Commute Time?
 This project explores whether areas in Los Angeles with greater access to metro stations have a shorter average commute time, additionally, we will be analyzing median household income for homes closest to the metro stations in Los Angeles. The goal is to test the assumption that proximity to public transit rails resuces travel time for workers in Los Angeles, a historically commuter dense city. Additionally, I plan to include median household income as a control variable in the regression model to account for socioeconomic factors that may influence commute behavior.
 
+Main research question: 
+Do ZIP codes with more Metro stations have shorter average commute times—once income is accounted for?
+
 
 # Data sources
 This project uses geographic data from LA Metro to locate the location of all metro transit stops in Los Angeles County, I will be using their shapefiles to locate transit stop locations. The variables that will be used are: STOP_NAME, STOP_LAT, AND STOP_LON. To get commute time and median household income information, I will be using two different tables from the 5-year American Community Survey API data, and match by geography to the location of the LA metro transit stops. 
@@ -72,7 +75,9 @@ Add it to a .env file in the project folder like this:
 CENSUS_API_KEY=your_key_here
 
 - _describe what special python packages you have used_
-The packages you'll need are (also located in the 'requirements.txt') file: 
+The packages you'll need are (also located in the 'requirements.txt') file: pip install -r requirements.txt
+
+LIST: 
 requests (to call the ACS API)
 os
 time
@@ -89,14 +94,42 @@ from dotenv import load_dotenv
 
 
 Instructions: 
-- The .env file contains the API Key (you will need to create, see instructions above)
-- 'main.py' runs the full ZIP-level retrieval and saves the CSV.
+- The .env file contains the API Key. You must create a ".env" file ad the file should contain: CENSUS_API_KEY=your_key_here (template is provided: .env.example) 
+- 'main.py' 
 - 'tests.py' checks if the function is running correctly
 
 
 # Running analysis 
 _update these instructions_
-IN-PROGRESS. (NEED TO UPDATE FOR FINAL SUBMISSION).
+The analysis consists of:
+
+1. Data Construction Pipeline
+Implemented in main.py:
+- Pull all LA County ZIP codes
+- Download ACS commute time
+- Download ACS median household income
+- Run spatial joins (stations → ZIPs)
+- Create a unified dataset combining:
+   - station count
+   - mean commute minutes
+   - median income
+   - ZIP code
+The merged dataset is then used for modeling.
+
+
+
+2. Statistical Analysis
+   In the results.ipynb, the following are performed:
+   a. Descriptive Analysis:
+       - Distribution of commute times
+       - Distribution of station counts
+       - Scatterplot of:
+           - stations vs commute
+           - income vs commute
+
+    b. Regression Model: OLS regression estimating: CommuteTime = β0 + β1*(StationCount) + β2*(MedianIncome) + ε
+
+   
 
 
 ##### FOR THE PROGRESS REPORT #######
