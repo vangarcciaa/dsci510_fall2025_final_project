@@ -4,9 +4,7 @@ Contains ONLY constants such as file names, paths, and API URLs.
 No API keys should ever be placed here.
 """
 
-# ---------------------------
 # File paths
-# ---------------------------
 
 # Raw ACS output CSVs
 COMMUTE_CSV = "data/la_county_commute_zips.csv"
@@ -22,9 +20,7 @@ METRO_STATIONS_SHP = "data/230711_All_MetroRail_Stations.shp"
 # ZCTA shapefile
 ZCTA_SHP = "data/tl_2020_us_zcta520.shp"
 
-# ---------------------------
 # API URLs
-# ---------------------------
 
 # Census crosswalk file (ZCTA → County)
 ZCTA_CROSSWALK_URL = (
@@ -35,8 +31,5 @@ ZCTA_CROSSWALK_URL = (
 ACS_COMMUTE_URL = "https://api.census.gov/data/2022/acs/acs5/subject"
 ACS_INCOME_URL = "https://api.census.gov/data/2022/acs/acs5"
 
-# ---------------------------
 # Settings
-# ---------------------------
-
 API_SLEEP_SECONDS = 0.2
