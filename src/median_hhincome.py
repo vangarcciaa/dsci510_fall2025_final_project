@@ -10,8 +10,6 @@ from config import (
     ACS_INCOME_URL,
     INCOME_CSV,
     API_SLEEP_SECONDS,
-    STATE_CODE,
-    COUNTY_CODE,
 )
 
 # Load API key from .env 
