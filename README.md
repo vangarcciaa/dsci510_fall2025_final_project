@@ -74,23 +74,8 @@ Add it to a .env file in the project folder like this:
 CENSUS_API_KEY=your_key_here
 
 - _describe what special python packages you have used_
-The packages you'll need are located in the 'requirements.txt' file: pip install -r requirements.txt
-
-LIST: 
-requests (to call the ACS API)
-os
-time
-numpy
-pandas
-seaborn
-requests
-geopandas
-python-dotenv
-statsmodels.api
-matplotlib.pyplot
-from io import BytesIO
-from dotenv import load_dotenv
-
+The packages you'll need are located in the 'requirements.txt' file:
+-  pip install -r requirements.txt
 
 Instructions: 
 - Install all required packages: pip install -r requirements.txt
